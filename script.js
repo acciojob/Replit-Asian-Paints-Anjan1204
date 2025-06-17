@@ -1,22 +1,30 @@
-document.getElementById("change_button").addEventListener("click", () => {
+document.getElementById("change_button").addEventListener("click", function () {
   const blockId = document.getElementById("block_id").value.trim();
   const color = document.getElementById("colour_id").value.trim();
 
-  // Reset all blocks to transparent
-  for (let i = 1; i <= 9; i++) {
-    document.getElementById(i.toString()).style.backgroundColor = "transparent";
-  }
+  // Reset all grid item background colors
+  const gridItems = document.querySelectorAll(".grid-item");
+  gridItems.forEach(item => {
+    item.style.backgroundColor = "transparent";
+  });
 
-  // Change color of the selected block if valid
-  if (blockId >= 1 && blockId <= 9) {
-    document.getElementById(blockId).style.backgroundColor = color;
+  // Change color of selected grid
+  const targetBlock = document.getElementById(blockId);
+  if (targetBlock) {
+    targetBlock.style.backgroundColor = color;
   } else {
-    alert("Please enter a valid Block ID (1 to 9)");
+    alert("Invalid Block ID. Please enter a number between 1 and 9.");
   }
 });
 
-document.getElementById("Reset").addEventListener("click", () => {
-  for (let i = 1; i <= 9; i++) {
-    document.getElementById(i.toString()).style.backgroundColor = "transparent";
-  }
+// Reset button functionality
+document.getElementById("Reset").addEventListener("click", function () {
+  const gridItems = document.querySelectorAll(".grid-item");
+  gridItems.forEach(item => {
+    item.style.backgroundColor = "transparent";
+  });
+
+  // Clear input fields
+  document.getElementById("block_id").value = "";
+  document.getElementById("colour_id").value = "";
 });
